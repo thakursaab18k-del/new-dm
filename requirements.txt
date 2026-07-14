@@ -1,1 +1,4 @@
-telethon==1.44.0
+telethon
+motor
+pymongo[srv]
+aiohttp
