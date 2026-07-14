@@ -290,7 +290,7 @@ async def my_accounts_handler(event):
         text += f"`{i}.` 📱 {acc['_id']} [{icon}]\n"
     await event.edit(text, buttons=[[Button.inline("Back 🔙", b"main_menu")]])
 
-# --- 3. SET AD MESSAGE (Fixed cut-off code) ---
+# --- 3. SET AD MESSAGE ---
 @bot.on(events.CallbackQuery(data=b"set_ad"))
 async def set_ad_handler(event):
     sender = event.sender_id
@@ -351,5 +351,7 @@ async def main():
     await bot.run_until_disconnected()
 
 if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
+    # Fixed for newer Python versions (RuntimeError fix)
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
     loop.run_until_complete(main())
